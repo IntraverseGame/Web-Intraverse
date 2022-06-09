@@ -822,7 +822,45 @@ select {
         
     }
     
+      
+
+.SilverCard{
+    max-height: 50%; 
+              
     
+    
+    
+    background-color: rgba(	0,0,0, 0.4);
+    
+    width: 20rem;
+      border-radius: 5%; border-color: rgb(146,150,158);
+   box-shadow: 0px 0px 10px 2px rgb(146,150,158);
+}
+
+.GoldCard{
+    max-height: 50%; 
+              
+    
+    
+    
+    background-color: rgba(	0,0,0, 0.4);
+    
+    width: 20rem;
+      border-radius: 5%; border-color: rgb(196,169,70);
+   box-shadow: 0px 0px 10px 2px rgb(255, 255, 255);
+}
+.BronzeCard{
+    max-height: 50%; 
+              
+    
+    
+    
+    background-color: rgba(	0,0,0, 0.4);
+    
+    width: 20rem;
+      border-radius: 5%; border-color: rgb(187,113,83);
+   box-shadow: 0px 0px 10px 2px rgb(255, 255, 255);
+}
     
     
     @media screen and (min-width:662px) ,screen and (max-width:933px) {
@@ -831,11 +869,36 @@ select {
            margin-left: -15px;
             
         }
+        
+        .SilverCard{
+            max-width: 50%;
+
+        }
+        .GoldCard{
+            max-width: 50%;
+            
+        }
+        .BronzeCard{
+            max-width: 50%;
+            
+        }
     }
 
     @media screen and (min-width:1000px) {
         .customDiv{
             margin-left: 40px;
         }
+        .SilverCard{
+            max-width: none;
+
+        }
+        .GoldCard{
+            max-width: none;
+            
+        }
+        .BronzeCard{
+            max-width: none;
+            
+        }
     }
-  
+    

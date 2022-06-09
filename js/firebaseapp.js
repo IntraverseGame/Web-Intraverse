@@ -227,23 +227,24 @@ var contestCoins = [];
 var contestLeaderboard = [];
  const totalPositionCounter = 1;
  var positionCounter = 1;
+
   //userData();
   displayData();
-  
+  getBoxData();
 
    var totalCoinsCollected = 0;
   
   const users = collection(db,"users");
   
-    const boxCollected = query(users,where("CollectedSpecialBox","==","true"));
+   /*  const boxCollected = query(users,where("CollectedSpecialBox","==","true"));
 
     const snapshot = await getDocs(boxCollected);
     snapshot.forEach(doc => {
       console.log(doc.data().username + " referral code  " + doc.data().refferalCode);
       
-    });
+    }); */
   
-  
+    
   
 
   
@@ -376,7 +377,63 @@ var contestLeaderboard = [];
 
   
 }
+async function getBoxData()
+{
+  var bronzeBoxCollected = 0;
+  var silverBoxCollected = 0;
+  var goldBoxCollected = 0;
+  var totalSilverBox =0;
+  var totalGoldBox =0;
+  var totalBronzeBox =0;
+ 
 
+  const docRef = doc(db,"CollectableBoxInformation","NFTBoxes");
+  const snapshot = await getDoc(docRef);
+  const users = collection(db,"users");
+  const bronzeDocuments = query(users,where("BronzeBox",">=",0));
+  const silverDocuments = query(users,where("SilverBox",">=",0));
+  const goldDocuments = query(users,where("GoldBox",">=",0));
+
+
+
+  const bronzeSnapshot = await getDocs(bronzeDocuments);
+  const silverSnapshot = await getDocs(silverDocuments);
+  const goldSnapshot = await getDocs(goldDocuments);
+
+
+  bronzeSnapshot.forEach((doc) =>{
+    console.log(doc.data());
+    bronzeBoxCollected = bronzeBoxCollected+doc.data().BronzeBox;
+  });
+
+  silverSnapshot.forEach((doc) =>{
+    
+    silverBoxCollected = silverBoxCollected+doc.data().SilverBox;
+  });
+
+  goldSnapshot.forEach((doc) =>{
+    
+    goldBoxCollected = goldBoxCollected+doc.data().GoldBox;
+  });
+
+
+
+
+
+
+
+  if(snapshot.exists())
+  {
+    totalSilverBox = snapshot.data().SilverBox;
+    totalGoldBox = snapshot.data().GoldBox;
+    totalBronzeBox = snapshot.data().BronzeBox;
+  }
+
+  document.getElementById("SilverBox").innerHTML ="Silver Boxes Collected: "+ silverBoxCollected+"/"+totalSilverBox;
+  document.getElementById("GoldBox").innerHTML = "Gold Boxes Collected: "+goldBoxCollected+"/"+totalGoldBox;
+  document.getElementById("BronzeBox").innerHTML = "Bronze Boxes Collected: "+bronzeBoxCollected+"/"+totalBronzeBox;
+
+}
 
 
 
@@ -408,6 +465,7 @@ async function getDataFromServer() {
   if(docSnap.exists())
   {
     const datafromServer = docSnap.data();
+    
     localStorage.setItem('dataFromServer',datafromServer);
     localStorage.setItem('charChoice',datafromServer.charChoice);
     localStorage.setItem('ref',datafromServer.refferalCode);
@@ -429,6 +487,32 @@ async function getDataFromServer() {
     {
       localStorage.setItem('ContestCoins',datafromServer.contestCoins);
     }
+
+    
+    if(typeof datafromServer.BronzeBox === "undefined")
+    {
+      localStorage.setItem("BronzeBox",0);
+    }
+    else if (typeof datafromServer.BronzeBox !== "undefined")
+    {
+      localStorage.setItem("BronzeBox",datafromServer.BronzeBox);
+    }
+    if(typeof datafromServer.SilverBox === "undefined")
+    {
+      localStorage.setItem("SilverBox",0);
+    }
+    else if (typeof datafromServer.SilverBox !== "undefined")
+    {
+      localStorage.setItem("SilverBox",datafromServer.SilverBox);
+    }
+    if(typeof datafromServer.GoldBox === "undefined")
+    {
+      localStorage.setItem("GoldBox",0);
+    }
+    else if (typeof datafromServer.GoldBox !== "undefined")
+    {
+      localStorage.setItem("GoldBox",datafromServer.GoldBox);
+    }
   }
   else {
     // doc.data() will be undefined in this case
@@ -448,7 +532,7 @@ if(pathname=='/account.html'){
     }
   })
     var temp;
-    displayData();
+    //displayData();
     if('ContestCoins' in localStorage)
     {
       console.log('exists')
@@ -475,7 +559,10 @@ if(pathname=='/account.html'){
       "Total points collected: " + localStorage.getItem('coins'); 
       document.getElementById("points").innerHTML =
       totalCoins + " INTRA";
-      
+    
+    document.getElementById('BronzeBox').innerHTML = "x"+localStorage.getItem("BronzeBox");
+    document.getElementById('SilverBox').innerHTML = "x"+localStorage.getItem("SilverBox");
+    document.getElementById('GoldBox').innerHTML = "x"+localStorage.getItem("GoldBox");
  
 }
 else if(pathname=='/account_ita.html'){
