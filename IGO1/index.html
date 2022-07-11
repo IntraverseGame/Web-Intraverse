@@ -90,7 +90,7 @@
       else if (ref == undefined)
       {
         console.log('referral is not live');
-        unityInstance.SendMessage("webGetr","getSignedinUserID",localStorage.getItem("uid"));
+        unityInstance.SendMessage("webGetr","getSignedinUserID",localStorage.getItem('uid'));
         unityInstance.SendMessage("webGetr","PassRefferal",null);
       }
       }).then({

@@ -271,7 +271,14 @@ var contestLeaderboard = [];
   
     x.forEach(element => {
       
-      if(element.refferalCode == localStorage.getItem('refCode'))
+      if(element.username === 'Intraverse Treasury')
+      {
+          document.getElementById('Treasuary').innerHTML = "Coins in Treasuary : " + x[0].userCoins; 
+          x.shift()
+      
+        }
+      
+    else if(element.refferalCode == localStorage.getItem('refCode'))
       {
        
         document.getElementById("userEmail").innerHTML = element.username;
@@ -292,7 +299,7 @@ var contestLeaderboard = [];
         
 
       }
-      else {
+      else if (element.username !== 'Intraverse Treasury') {
         positionCounter = positionCounter +1;
         
       }
