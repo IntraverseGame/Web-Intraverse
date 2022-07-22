@@ -38,7 +38,7 @@
         
       </div>
     </div>
-    <script src="Build/build.loader.js"></script>
+    <script src="Build/Build.loader.js"></script>
     <script>
       var ref = null;
      
@@ -54,9 +54,9 @@
 
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/build.data",
-        frameworkUrl: "Build/build.framework.js",
-        codeUrl: "Build/build.wasm",
+        dataUrl: "Build/Build.data",
+        frameworkUrl: "Build/Build.framework.js",
+        codeUrl: "Build/Build.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "intraverse",
@@ -65,7 +65,7 @@
       {
         loadingBar.style.display = "block";
         var script = document.createElement("script");
-        script.src = "Build/BuildsWeb.framework.js";
+        script.src = "Build/Build.framework.js";
         script.onload = () =>
         {
           progressBarFull.style.width = (progress * 100) + "%";
